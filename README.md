@@ -1,4 +1,4 @@
-<p align="center"><img src="images/T-Mamba-logo.png" width="130"></p>
+﻿<p align="center"><img src="images/logo.jpg" width="130"></p>
 
 <h1 align="center">A Unified T-Mamba Framework for 2D and 3D Dental Segmentation</h1>
 
@@ -8,7 +8,7 @@ Final-year project, Computer Science and Engineering
 </p>
 
 **Repository:** https://github.com/Maleshkumarvelmurugan1982/A-Unified-T-Mamba-Framework-for-2D-and-3D-Dental-Segmentation
-**Guide:** Mrs. T. Bhuvaneswari &nbsp;·&nbsp; **Team:** V. Maleshkumar, S. Sujan, R. Mallesh Kumar
+**Guide:** Mrs. T. Bhuvaneswari &nbsp;Â·&nbsp; **Team:** V. Maleshkumar, S. Sujan, R. Mallesh Kumar
 
 ---
 
@@ -69,10 +69,10 @@ All "ours" numbers come from our own runs (test split: 2D = 1,225 X-rays, 3D = 2
 
 | Metric | T-Mamba paper | T-Mamba2D (our baseline) | **UniMiSS-2D (proposed)** |
 |---|---|---|---|
-| IoU (%) ↑ | 81.52 | 79.76 | **80.22** |
-| DSC (%) ↑ | 88.25 | 88.42 | **88.70** |
-| ACC (%) ↑ | 96.55 | 96.20 | **96.29** |
-| JI (%) ↑ | – | 79.61 | **80.07** |
+| IoU (%) â†‘ | 81.52 | 79.76 | **80.22** |
+| DSC (%) â†‘ | 88.25 | 88.42 | **88.70** |
+| ACC (%) â†‘ | 96.55 | 96.20 | **96.29** |
+| JI (%) â†‘ | â€“ | 79.61 | **80.07** |
 | Parameters (M) | 0.68 | 0.943 | 0.943 |
 | FLOPs (G) | 19.58 | 18.744 | 18.744 |
 
@@ -84,11 +84,11 @@ All "ours" numbers come from our own runs (test split: 2D = 1,225 X-rays, 3D = 2
 
 | Metric | T-Mamba paper | T-Mamba3D (our baseline) | **PFESA (proposed)** |
 |---|---|---|---|
-| DSC (%) ↑ | 93.60 | 96.69 | **96.70** |
-| IoU (%) ↑ | 88.31 | 93.95 | **93.98** |
-| SO (%) ↑ | 97.53 | 98.37 | **98.53** |
-| HD (voxels) ↓ | 0.0118 | 3.9191 | **0.5954** |
-| ASSD (voxels) ↓ | 0.42 | 0.42 | **0.21** |
+| DSC (%) â†‘ | 93.60 | 96.69 | **96.70** |
+| IoU (%) â†‘ | 88.31 | 93.95 | **93.98** |
+| SO (%) â†‘ | 97.53 | 98.37 | **98.53** |
+| HD (voxels) â†“ | 0.0118 | 3.9191 | **0.5954** |
+| ASSD (voxels) â†“ | 0.42 | 0.42 | **0.21** |
 
 Parameters are 1.31 M for both (PFESA adds 0). FLOPs: baseline 50.56 G, PFESA about 51.9 G (analytic estimate, not profiler-measured).
 
