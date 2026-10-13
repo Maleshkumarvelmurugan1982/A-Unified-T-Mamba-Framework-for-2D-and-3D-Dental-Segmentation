@@ -1,0 +1,28 @@
+# data, weights, run outputs (too large / not for git - see README)
+datasets/NC-release-data-checked/
+datasets/Tooth2D-X-Ray-6k/
+runs/
+runs_ssl/
+logs/
+demo_out/
+viz3d/
+*.pth
+*.pt
+*.state
+*.nii.gz
+*.npy
+*.log
+all_outputs.zip
+# python / build
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+*.so
+.DS_Store
+.ipynb_checkpoints/
+
+# keep the small 2D baseline checkpoint (4 MB) so the demo works right after cloning
+!pretrain/best_TMamba2D.pth
+datasets/_downloads/
