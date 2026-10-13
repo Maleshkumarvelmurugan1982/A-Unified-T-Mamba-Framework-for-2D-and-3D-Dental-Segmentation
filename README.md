@@ -1,4 +1,4 @@
-﻿<p align="center"><img src="images/logo.jpg" width="130"></p>
+﻿<p align="center"><img src="images/T-Mamba-logo.png" width="130"></p>
 
 <h1 align="center">A Unified T-Mamba Framework for 2D and 3D Dental Segmentation</h1>
 
