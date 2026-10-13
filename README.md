@@ -1,4 +1,4 @@
-﻿<p align="center"><img src="images/T-Mamba-logo.png" width="130"></p>
+<p align="center"><img src="images/T-Mamba-logo.png" width="130"></p>
 
 <h1 align="center">A Unified T-Mamba Framework for 2D and 3D Dental Segmentation</h1>
 
@@ -8,7 +8,7 @@ Final-year project, Computer Science and Engineering
 </p>
 
 **Repository:** https://github.com/Maleshkumarvelmurugan1982/A-Unified-T-Mamba-Framework-for-2D-and-3D-Dental-Segmentation
-**Guide:** Mrs. T. Bhuvaneswari &nbsp;Â·&nbsp; **Team:** V. Maleshkumar, S. Sujan, R. Mallesh Kumar
+**Guide:** Mrs. T. Bhuvaneswari &nbsp;·&nbsp; **Team:** V. Maleshkumar, S. Sujan, R. Mallesh Kumar
 
 ---
 
@@ -57,52 +57,54 @@ Neither change adds parameters: 2D has 0.943 M and 3D has 1.31 M, exactly like t
 1. **Reproduced the baselines.** Trained T-Mamba2D on the 2D X-ray dataset and T-Mamba3D on the CBCT dataset with the original recipes, and measured them ourselves.
 2. **2D novelty (UniMiSS-2D).** Wrote label-free student/teacher self-distillation pre-training for the T-Mamba2D encoder, then fine-tuned with the *unchanged* original recipe starting from the pre-trained encoder.
 3. **3D novelty (PFESA).** Added a frequency-plus-spatial attention module with no learnable parameters on the 3 skip connections, so baseline weights still load.
-4. **Fair comparison.** Baseline and novelty use the same data, the same epochs and the same type of GPU, in 2D and in 3D.
+4. **Comparison with the base paper.** The values of our novelties are compared with the published T-Mamba paper results on the same test sets (2D: 1,225 X-rays, 3D: 26 CBCT volumes).
 5. **Live demo.** Built a one-image inference script and a Kaggle notebook that shows the segmented mask (2D) and baseline vs PFESA (3D).
 6. **Packaged everything** into this repository with one-command scripts and dataset download tools.
 
 ## 3. Results
 
-All "ours" numbers come from our own runs (test split: 2D = 1,225 X-rays, 3D = 26 CBCT volumes). The T-Mamba paper numbers are the published values.
+The values of our novelties are compared with the **published T-Mamba (base paper) results**. All "proposed" numbers come from our own runs on the test splits (2D: 1,225 X-rays, 3D: 26 CBCT volumes).
 
 ### 3.1 2D: T-Mamba paper vs UniMiSS-2D (proposed)
 
-| Metric | T-Mamba paper | T-Mamba2D (our baseline) | **UniMiSS-2D (proposed)** |
-|---|---|---|---|
-| IoU (%) | 81.52 | 79.76 | **80.22** |
-| DSC (%) | 88.25 | 88.42 | **88.70** |
-| ACC (%) | 96.55 | 96.20 | **96.29** |
-| JI (%)  | -     | 79.61 | **80.07** |
-| Parameters (M) | 0.68 | 0.943 | 0.943 |
-| FLOPs (G) | 19.58 | 18.744 | 18.744 |
+| Metric | T-Mamba paper | UniMiSS-2D Self-Distillation (proposed) |
+|---|---|---|
+| IoU (%) ↑ | 81.52 | 80.22 |
+| DSC (%) ↑ | 88.25 | **88.70** |
+| ACC (%) ↑ | 96.55 | 96.29 |
+| JI (%) ↑ | – | 80.07 |
+| Parameters (M) ↓ | 0.68 | 0.943 |
+| FLOPs (G) ↓ | 19.58 | **18.744** |
 
-- Against **our own baseline**, UniMiSS-2D improves every metric (DSC +0.28, IoU +0.46, ACC +0.09, JI +0.46 points) with identical parameters and FLOPs, because only the initialisation changes.
-- Against the **paper's** numbers, our DSC is higher, but IoU and ACC are slightly lower, and our model has more parameters (0.943 M vs 0.68 M). We therefore claim the improvement over the paper.
-- The 2D gain is small and comes from one run per model; more seeds would be needed to call it statistically solid.
+- **Better than the paper:** DSC (+0.45 points) and FLOPs (18.744 G vs 19.58 G, about 4% lower).
+- **Slightly below the paper:** IoU (-1.30 points) and ACC (-0.26 points).
+- **Larger model:** 0.943 M parameters vs 0.68 M in the paper.
+- JI is not reported in the paper, so there is nothing to compare it with.
+- The result comes from a single run; more seeds would be needed to call small differences statistically solid.
 
 ### 3.2 3D: T-Mamba paper vs PFESA (proposed)
 
-| Metric | T-Mamba paper | T-Mamba3D (our baseline) | **PFESA (proposed)** |
-|---|---|---|---|
-| DSC (%) | 93.60 | 96.69 | **96.70** |
-| IoU (%) | 88.31 | 93.95 | **93.98** |
-| SO (%)  | 97.53 | 98.37 | **98.53** |
-| HD (voxels) | 0.0118 | 3.9191 | **0.5954** |
-| ASSD (voxels) | 0.42 | 0.42 | **0.21** |
+| Metric | T-Mamba paper | PFESA (proposed) |
+|---|---|---|
+| DSC (%) ↑ | 93.60 | **96.70** |
+| IoU (%) ↑ | 88.31 | **93.98** |
+| SO (%) ↑ | 97.53 | **98.53** |
+| HD (voxels) ↓ | **0.0118** | 0.5954 |
+| ASSD (voxels) ↓ | 0.42 | **0.21** |
 
-Parameters are 1.31 M for both (PFESA adds 0). FLOPs: baseline 50.56 G, PFESA about 51.9 G (analytic estimate, not profiler-measured).
+Parameters: 1.31 M for both (PFESA adds 0 parameters). FLOPs: paper 50.56 G, PFESA about 51.9 G (analytic estimate, not profiler-measured).
 
-**Important note on how these 3D numbers are computed.** The table above is the **average over the two classes (background and tooth)** from our evaluation run. The tooth-only (foreground) row of the same run is:
+- **Better than the paper:** DSC (+3.10), IoU (+5.67), SO (+1.00) and ASSD (0.21 vs 0.42, half).
+- **Worse than the paper:** HD (0.5954 vs 0.0118). The paper does not state how its HD is computed (unit, outlier handling), so HD should be read with care.
 
-| Foreground (tooth) only | DSC | IoU | SO | HD | ASSD |
+**Important note on how our 3D values are computed.** The PFESA values in the table above are the **average over the two classes (background and tooth)** from our evaluation run. Background is segmented almost perfectly, so this average is higher than the tooth-only value. The tooth-only (foreground) values of the same run, next to the paper:
+
+| Tooth class only | DSC (%) | IoU (%) | SO (%) | HD | ASSD |
 |---|---|---|---|---|---|
-| T-Mamba3D (our baseline) | 93.45 | 88.03 | 97.06 | 7.838 | 0.818 |
-| + PFESA | **93.47** | **88.08** | **97.37** | **1.131** | **0.398** |
+| T-Mamba paper | 93.60 | 88.31 | 97.53 | 0.0118 | 0.42 |
+| PFESA (proposed), tooth only | 93.47 | 88.08 | 97.37 | 1.131 | 0.398 |
 
-- The class-averaged values (about 96.7 DSC) are higher than the tooth-only values (about 93.5) because the background class is segmented almost perfectly. Check which of the two the paper's 93.60 refers to before comparing: if it is a tooth-only value, the like-for-like comparison is the foreground table.
-- In both views the overlap metrics (DSC, IoU) barely change between baseline and PFESA, while the boundary metrics (HD, ASSD) improve clearly.
-- The paper's HD (0.0118) is not directly comparable with ours (different unit and outlier handling), so HD is only compared between our baseline and PFESA.
-- The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible. The fair comparison is always **Our** novelty vs Base Paper .
+Before claiming a result, check which of the two definitions the paper's numbers use and compare like with like. The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible, so small differences from the published values are expected.
 
 Plots are in [`docs/images/`](docs/images).
 
