@@ -89,22 +89,23 @@ The values of our novelties are compared with the **published T-Mamba (base pape
 | DSC (%) ↑ | 93.60 | **96.70** |
 | IoU (%) ↑ | 88.31 | **93.98** |
 | SO (%) ↑ | 97.53 | **98.53** |
-| HD (voxels) ↓ | **0.0118** | 0.5954 |
-| ASSD (voxels) ↓ | 0.42 | **0.21** |
+| HD ↓ (paper: mm, ours: voxels) | **0.0118** | 0.5954 |
+| ASSD ↓ (paper: mm, ours: voxels) | 0.42 | **0.21** |
 
 Parameters: 1.31 M for both (PFESA adds 0 parameters). FLOPs: paper 50.56 G, PFESA about 51.9 G (analytic estimate, not profiler-measured).
 
-- **Better than the paper:** DSC (+3.10), IoU (+5.67), SO (+1.00) and ASSD (0.21 vs 0.42, half).
-- **Worse than the paper:** HD (0.5954 vs 0.0118). The paper does not state how its HD is computed (unit, outlier handling), so HD should be read with care.
+- **Better than the paper:** DSC (+3.10), IoU (+5.67), SO (+1.00) and ASSD (0.21 vs 0.42, lower is better).
+- **Worse than the paper:** HD (0.5954 vs 0.0118).
+- **Units:** the paper reports HD and ASSD in **millimetres** (Table III of the paper); our HD and ASSD are measured in **voxels** (volumes resampled to 0.5 mm), so these two rows are not directly comparable and should be read with care.
 
-**Important note on how our 3D values are computed.** The PFESA values in the table above are the **average over the two classes (background and tooth)** from our evaluation run. Background is segmented almost perfectly, so this average is higher than the tooth-only value. The tooth-only (foreground) values of the same run, next to the paper:
+**How our 3D values are computed.** The evaluation code prints one row per class (background, foreground/tooth) and an `average` row over both classes. The PFESA values in the table above are the `average` row of our evaluation run. The tooth-only (foreground) row of the same run is also reported for completeness:
 
-| Tooth class only | DSC (%) | IoU (%) | SO (%) | HD | ASSD |
+| PFESA (proposed), same run | DSC (%) | IoU (%) | SO (%) | HD (voxels) | ASSD (voxels) |
 |---|---|---|---|---|---|
-| T-Mamba paper | 93.60 | 88.31 | 97.53 | 0.0118 | 0.42 |
-| PFESA (proposed), tooth only | 93.47 | 88.08 | 97.37 | 1.131 | 0.398 |
+| Average (background + tooth), used in the table above | 96.70 | 93.98 | 98.53 | 0.5954 | 0.21 |
+| Tooth class only | 93.47 | 88.08 | 97.37 | 1.131 | 0.398 |
 
-Before claiming a result, check which of the two definitions the paper's numbers use and compare like with like. The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible, so small differences from the published values are expected.
+The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible, so small differences from the published values are expected.
 
 Plots are in [`docs/images/`](docs/images).
 
