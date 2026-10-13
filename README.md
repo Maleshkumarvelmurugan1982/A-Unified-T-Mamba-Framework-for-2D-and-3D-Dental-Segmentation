@@ -102,7 +102,7 @@ Parameters are 1.31 M for both (PFESA adds 0). FLOPs: baseline 50.56 G, PFESA ab
 - The class-averaged values (about 96.7 DSC) are higher than the tooth-only values (about 93.5) because the background class is segmented almost perfectly. Check which of the two the paper's 93.60 refers to before comparing: if it is a tooth-only value, the like-for-like comparison is the foreground table.
 - In both views the overlap metrics (DSC, IoU) barely change between baseline and PFESA, while the boundary metrics (HD, ASSD) improve clearly.
 - The paper's HD (0.0118) is not directly comparable with ours (different unit and outlier handling), so HD is only compared between our baseline and PFESA.
-- The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible. The fair comparison is always novelty vs **our** baseline.
+- The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible. The fair comparison is always **Our** novelty vs Base Paper .
 
 Plots are in [`docs/images/`](docs/images).
 
