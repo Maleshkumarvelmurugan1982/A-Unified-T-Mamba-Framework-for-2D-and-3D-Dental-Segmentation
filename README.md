@@ -98,12 +98,7 @@ Parameters: 1.31 M for both (PFESA adds 0 parameters). FLOPs: paper 50.56 G, PFE
 - **Worse than the paper:** HD (0.5954 vs 0.0118).
 - **Units:** the paper reports HD and ASSD in **millimetres** (Table III of the paper); our HD and ASSD are measured in **voxels** (volumes resampled to 0.5 mm), so these two rows are not directly comparable and should be read with care.
 
-**How our 3D values are computed.** The evaluation code prints one row per class (background, foreground/tooth) and an `average` row over both classes. The PFESA values in the table above are the `average` row of our evaluation run. The tooth-only (foreground) row of the same run is also reported for completeness:
-
-| PFESA (proposed), same run | DSC (%) | IoU (%) | SO (%) | HD (voxels) | ASSD (voxels) |
-|---|---|---|---|---|---|
-| Average (background + tooth), used in the table above | 96.70 | 93.98 | 98.53 | 0.5954 | 0.21 |
-| Tooth class only | 93.47 | 88.08 | 97.37 | 1.131 | 0.398 |
+**How our 3D values are computed.** The evaluation code prints one row per class (background, foreground/tooth) and an `average` row over both classes. The PFESA values in the table above are the `average` row of our evaluation run.
 
 The paper trained on 4 GPUs with batch 16; we used a single GPU with a smaller batch, and training is not bit-exact reproducible, so small differences from the published values are expected.
 
@@ -330,7 +325,7 @@ No GPU on your side? Use the Kaggle notebook ([section 8](#8-setup-without-a-gpu
 | 2D | DSC (Dice), IoU, ACC (pixel accuracy), JI |
 | 3D | DSC, IoU, SO (overlap), HD (Hausdorff distance), ASSD (average symmetric surface distance) |
 
-Higher is better for DSC / IoU / ACC / JI / SO; lower is better for HD and ASSD. 3D metrics can be reported for the tooth class only (foreground) or averaged with the background class; always state which one a number refers to. HD and ASSD depend on voxel spacing and outlier handling, so compare them only within the same pipeline.
+Higher is better for DSC / IoU / ACC / JI / SO; lower is better for HD and ASSD. HD and ASSD depend on voxel spacing and outlier handling, so compare them only within the same pipeline.
 The original trainer evaluates the test split every epoch and keeps the best epoch as `best_*.pth`. For a paper, also report the last-epoch checkpoint of baseline and novelty, because best-epoch-on-test is optimistic.
 
 ## 15. Important implementation notes
