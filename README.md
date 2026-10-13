@@ -69,26 +69,26 @@ All "ours" numbers come from our own runs (test split: 2D = 1,225 X-rays, 3D = 2
 
 | Metric | T-Mamba paper | T-Mamba2D (our baseline) | **UniMiSS-2D (proposed)** |
 |---|---|---|---|
-| IoU (%) â†‘ | 81.52 | 79.76 | **80.22** |
-| DSC (%) â†‘ | 88.25 | 88.42 | **88.70** |
-| ACC (%) â†‘ | 96.55 | 96.20 | **96.29** |
-| JI (%) â†‘ | â€“ | 79.61 | **80.07** |
+| IoU (%) | 81.52 | 79.76 | **80.22** |
+| DSC (%) | 88.25 | 88.42 | **88.70** |
+| ACC (%) | 96.55 | 96.20 | **96.29** |
+| JI (%)  | -     | 79.61 | **80.07** |
 | Parameters (M) | 0.68 | 0.943 | 0.943 |
 | FLOPs (G) | 19.58 | 18.744 | 18.744 |
 
 - Against **our own baseline**, UniMiSS-2D improves every metric (DSC +0.28, IoU +0.46, ACC +0.09, JI +0.46 points) with identical parameters and FLOPs, because only the initialisation changes.
-- Against the **paper's** numbers, our DSC is higher, but IoU and ACC are slightly lower, and our model has more parameters (0.943 M vs 0.68 M). We therefore claim the improvement over our own baseline, not over the paper.
+- Against the **paper's** numbers, our DSC is higher, but IoU and ACC are slightly lower, and our model has more parameters (0.943 M vs 0.68 M). We therefore claim the improvement over the paper.
 - The 2D gain is small and comes from one run per model; more seeds would be needed to call it statistically solid.
 
 ### 3.2 3D: T-Mamba paper vs PFESA (proposed)
 
 | Metric | T-Mamba paper | T-Mamba3D (our baseline) | **PFESA (proposed)** |
 |---|---|---|---|
-| DSC (%) â†‘ | 93.60 | 96.69 | **96.70** |
-| IoU (%) â†‘ | 88.31 | 93.95 | **93.98** |
-| SO (%) â†‘ | 97.53 | 98.37 | **98.53** |
-| HD (voxels) â†“ | 0.0118 | 3.9191 | **0.5954** |
-| ASSD (voxels) â†“ | 0.42 | 0.42 | **0.21** |
+| DSC (%) | 93.60 | 96.69 | **96.70** |
+| IoU (%) | 88.31 | 93.95 | **93.98** |
+| SO (%)  | 97.53 | 98.37 | **98.53** |
+| HD (voxels) | 0.0118 | 3.9191 | **0.5954** |
+| ASSD (voxels) | 0.42 | 0.42 | **0.21** |
 
 Parameters are 1.31 M for both (PFESA adds 0). FLOPs: baseline 50.56 G, PFESA about 51.9 G (analytic estimate, not profiler-measured).
 
